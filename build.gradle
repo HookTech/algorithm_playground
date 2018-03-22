@@ -25,6 +25,10 @@ allprojects {
     targetCompatibility = 1.7
 }
 
+dependencies{
+    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+}
+
 task sourcesJar(type: Jar, dependsOn:classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
