@@ -47,6 +47,23 @@ public class GetMaxWindowClass implements StackAndQueueCallMethod {
         while (true);
     }
 
+    /***standard resolve***/
+    private int[] getMaxWindows(int[] arr, int w){
+        if(arr == null || w < 1 || arr.length < w) return null;
+        LinkedList<Integer> qmax = new LinkedList<>();
+        int[] res = new int[arr.length - w + 1];
+        int index = 0;
+        for(int i = 0; i < arr.length; i++){
+            while (!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[i]){
+                qmax.pollLast();
+            }
+            qmax.addLast(i);
+            if(qmax.peekFirst() == i - w){ qmax.pollFirst(); }
+            if(i >= w - 1){ res[index++] = arr[qmax.peekFirst()]; }
+        }
+        return res;
+    }
+
     @Override
     public void callStackAndQueueAlgoMethod() {
         getMaxWindowTest();
@@ -55,6 +72,6 @@ public class GetMaxWindowClass implements StackAndQueueCallMethod {
     /**** unit test below ****/
     @Test(groups = "StackAndQueue")
     public void getMaxWindowTest(){
-        TestUtil.printIntArray(getMaxWindow(new int[]{4,3,5,4,6,3,6,7},2));
+        TestUtil.printIntArray(getMaxWindows(new int[]{4,3,5,4,6,3,6,7},1));
     }
 }
