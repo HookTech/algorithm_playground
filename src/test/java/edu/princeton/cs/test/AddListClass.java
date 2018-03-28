@@ -60,8 +60,34 @@ public class AddListClass implements ListPCallMethod{
     }
     /*** official resolve **/
     private Node<Integer> officialAddLists(Node<Integer> head1, Node<Integer> head2){
-
-        return new Node<>(0);
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+        while(head1 != null){
+            s1.push(head1.value);
+            head1 = head1.next;
+        }
+        while (head2 != null){
+            s2.push(head2.value);
+            head2 = head2.next;
+        }
+        int ca = 0;int n1 = 0;int n2 = 0;int n = 0;
+        Node<Integer> node = null;
+        Node<Integer> pre = null;
+        while (!s1.isEmpty() || !s2.isEmpty()){
+            n1 = s1.isEmpty() ? 0 : s1.pop();
+            n2 = s2.isEmpty() ? 0 : s2.pop();
+            n = n1 + n2 + ca;
+            pre = node;
+            node = new Node<>(n % 10);
+            node.next = pre;
+            ca = n / 10;
+        }
+        if(ca == 1){
+            pre = node;
+            node = new Node(1);
+            node.next = pre;
+        }
+        return node;
     }
 
     @Override
@@ -76,7 +102,7 @@ public class AddListClass implements ListPCallMethod{
         TestUtil.printString("List2");
         TestUtil.printList(head2);
         TestUtil.printString("list1 + list2 bring out result");
-        TestUtil.printList(selfAddLists(head1,head2));
+        TestUtil.printList(officialAddLists(head1,head2));
     }
 
     @BeforeMethod(groups = "ListPTest")
