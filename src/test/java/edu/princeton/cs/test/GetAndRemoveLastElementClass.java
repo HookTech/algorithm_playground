@@ -6,11 +6,36 @@ import org.testng.annotations.Test;
 
 import java.util.Stack;
 
+/**
+ * 一个栈依次压入1、2、3、4、5，那么从栈顶到栈底分别为5、4、3、2、1。
+ * 在不借助其他数据结构条件下实现栈的转置，即从栈顶到栈底变成1、2、3、4、5
+ * */
 public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
     /*** self practice function **/
-    private void selfReverseStack(Stack<Integer> sk){}
+    private void selfReverseStack(Stack<Integer> sk){
+    }
+
+    private Integer lastElement(Stack<Integer> sk){return 0;}
 
     /***standard resolve***/
+    private Integer getAndRemoveLastElement(Stack<Integer> sk){
+        Integer result = sk.pop();
+        if(sk.empty()){return result;}
+        else{
+            Integer last = getAndRemoveLastElement(sk);
+            sk.push(result);
+            return last;
+        }
+    }
+
+    private void officialReverse(Stack<Integer> sk){
+        if(sk.empty()) {return;}
+        else {
+            Integer last = getAndRemoveLastElement(sk);
+            officialReverse(sk);
+            sk.push(last);
+        }
+    }
     @Override
     public void callStackAndQueueAlgoMethod() {
         getAndRemoveLastElementTest();
@@ -21,7 +46,7 @@ public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
         TestUtil.printString("Before reverse, stack is:");
         TestUtil.printStackReversly(sk);
         TestUtil.printString("Reverse stack ... ");
-        selfReverseStack(sk);
+        officialReverse(sk);
         TestUtil.printString("After reverse, stack is");
         TestUtil.printStackReversly(sk);
     }

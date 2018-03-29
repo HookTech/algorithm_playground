@@ -5,6 +5,9 @@ import org.testng.annotations.Test;
 import java.util.Deque;
 import java.util.LinkedList;
 
+/**
+ * 生成窗口最大值数组问题
+ * */
 public class GetMaxWindowClass implements StackAndQueueCallMethod {
     /*** self practice function **/
     //get max value collection steam from big array with window move

@@ -8,8 +8,7 @@ import java.util.Stack;
 import static edu.princeton.cs.test.CommonStructure.Node;
 
 /**
- * two list standing for int value add together
- *
+ * 两个单链表生成相加链表问题
  * @author philo
  * @create 2018-03-27 9:26 AM
  **/
