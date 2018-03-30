@@ -91,6 +91,7 @@ public class AddListClass implements ListPCallMethod{
 
     @Override
     public void callListPCallAlgoMethod() {
+        prepareTestData();
         addListTest();
     }
 

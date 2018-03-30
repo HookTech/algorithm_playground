@@ -38,6 +38,7 @@ public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
     }
     @Override
     public void callStackAndQueueAlgoMethod() {
+        prepareTestData();
         getAndRemoveLastElementTest();
     }
 
