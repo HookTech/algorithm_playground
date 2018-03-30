@@ -1,5 +1,6 @@
 package edu.princeton.cs.test;
 
+import java.util.Random;
 import java.util.Stack;
 
 import static java.lang.System.out;
@@ -7,6 +8,8 @@ import static edu.princeton.cs.test.CommonStructure.Node;
 
 public class TestUtil {
     private static char separator = ',';
+    private static Random random = new Random(7);
+
     public static void printIntArray(int[] array){
         StringBuffer buffer = new StringBuffer();
 
@@ -49,5 +52,9 @@ public class TestUtil {
         for(Object cln : array){  skclone.push(((Integer) cln));  }
         String stackStr = recursionString(skclone);
         TestUtil.printString(stackStr.substring(stackStr.indexOf(TestUtil.separator) + 1));
+    }
+
+    public static int generateRandomInteger(){
+        return random.nextInt(3);
     }
 }

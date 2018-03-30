@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -18,6 +19,7 @@ public abstract class BaseObjectTest<T extends BaseTestInterface> {
 
     protected void initTestTasks(Class<T> type) {
         try {
+            if(!type.isInterface()) throw new InstantiationException();
             String packageDirName = packageName.replace('.', '/');
             ClassLoader appClassLoader = Thread.currentThread().getContextClassLoader();
             Enumeration<URL> dirs = appClassLoader.getResources(packageDirName);
@@ -32,8 +34,13 @@ public abstract class BaseObjectTest<T extends BaseTestInterface> {
                         .append(file.getName().substring(0, file.getName().indexOf(".")));
                 Class currentClass = appClassLoader.loadClass(classNameToBeLoadedBuff.toString());
                 if (!currentClass.equals(BaseTestInterface.class) && BaseTestInterface.class.isAssignableFrom(currentClass) && !currentClass.isInterface()) {
-                    if (type.isAssignableFrom(currentClass))
-                        testTasks.add((T) currentClass.newInstance());
+                    if (type.isAssignableFrom(currentClass)) {
+                        //currentclass is xxxClass implements 'class<T> type'
+//                        testTasks.add((T) currentClass.newInstance());
+                        testTasks.add((T) Proxy.newProxyInstance(type.getClassLoader(),
+                                new Class[]{type},
+                                new BaseTestInterfaceProxyHandler<T>((T)currentClass.newInstance())));
+                    }
                 }
             }
         }
