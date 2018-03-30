@@ -42,7 +42,7 @@ public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
         getAndRemoveLastElementTest();
     }
 
-    @Test(groups = "StackAndQueue")
+    @Test(groups = StackAndQueueCallMethod.testBaseName)
     public void getAndRemoveLastElementTest(){
         TestUtil.printString("Before reverse, stack is:");
         TestUtil.printStackReversly(sk);
@@ -52,7 +52,7 @@ public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
         TestUtil.printStackReversly(sk);
     }
 
-    @BeforeMethod(groups = "StackAndQueue")
+    @BeforeMethod(groups = StackAndQueueCallMethod.testBaseName)
     public void prepareTestData(){
         sk = new Stack<>();
         for(int i = 0; i < 9; i++) {
@@ -61,5 +61,4 @@ public class GetAndRemoveLastElementClass implements StackAndQueueCallMethod {
     }
 
     private Stack<Integer> sk;
-
 }

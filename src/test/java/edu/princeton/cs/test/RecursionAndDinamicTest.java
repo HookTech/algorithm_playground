@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
  **/
 public class RecursionAndDinamicTest extends BaseObjectTest<RecursionAndDinamicCallMethod>{
 
-    @BeforeMethod(groups = "RecursionAndDinamic")
+    @BeforeMethod(groups = RecursionAndDinamicCallMethod.testBaseName)
     public void initInstance(){super.initTestTasks(RecursionAndDinamicCallMethod.class);}
 
-    @Test(groups = "RecursionAndDinamic")
+    @Test(groups = RecursionAndDinamicCallMethod.testBaseName)
     @Override
     protected void groupTest() {
         for(RecursionAndDinamicCallMethod task : testTasks){

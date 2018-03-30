@@ -72,7 +72,7 @@ public class GetMaxWindowClass implements StackAndQueueCallMethod {
         getMaxWindowTest();
     }
 
-    @Test(groups = "StackAndQueue")
+    @Test(groups = StackAndQueueCallMethod.testBaseName)
     public void getMaxWindowTest(){
         TestUtil.printString("array is:");
         TestUtil.printIntArray(new int[]{4,3,5,4,6,3,6,7});

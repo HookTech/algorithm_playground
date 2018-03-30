@@ -95,7 +95,7 @@ public class AddListClass implements ListPCallMethod{
         addListTest();
     }
 
-    @Test(groups = "ListPTest")
+    @Test(groups = ListPCallMethod.testBaseName)
     public void addListTest(){
         TestUtil.printString("List1");
         TestUtil.printList(head1);
@@ -105,7 +105,7 @@ public class AddListClass implements ListPCallMethod{
         TestUtil.printList(officialAddLists(head1,head2));
     }
 
-    @BeforeMethod(groups = "ListPTest")
+    @BeforeMethod(groups = ListPCallMethod.testBaseName)
     public void prepareTestData(){
         head1 = new Node<>(1);
         head2 = new Node<>(2);

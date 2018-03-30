@@ -35,7 +35,7 @@ public class JumpGameClass implements RecursionAndDinamicCallMethod{
         jumpGame();
     }
 
-    @Test(groups = "RecursionAndDinamic")
+    @Test(groups = RecursionAndDinamicCallMethod.testBaseName)
     public void jumpGame(){
         int[] jumpArray = new int[]{3,-1,5,3,0,2,1,1};
         TestUtil.printString("jump arr is:");
