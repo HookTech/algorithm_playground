@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class JumpGameClass implements RecursionAndDinamicCallMethod{
 
     /*** self practice function **/
-    private int jump(int[] arr){
+    private int selfJump(int[] arr){
         return minStep(arr,0,arr.length - 1);
     }
 
@@ -30,6 +30,21 @@ public class JumpGameClass implements RecursionAndDinamicCallMethod{
     }
 
     /***standard resolve***/
+    public int officialJump(int[] arr){
+        if (arr == null || arr.length == 0){return 0;}
+        int jump = 0;
+        int cur = 0;
+        int next = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if(cur < i){
+                jump++;
+                cur = next;
+            }
+            next = Math.max(next,i + arr[i]);
+        }
+        return jump;
+    }
+
     @Override
     public void callRecursionAndDinamicAlgoMethod() {
         try {
@@ -45,7 +60,7 @@ public class JumpGameClass implements RecursionAndDinamicCallMethod{
         int[] jumpArray = new int[]{3,-1,5,3,0,2,1,1};
         TestUtil.printString("jump arr is:");
         TestUtil.printIntArray(jumpArray);
-        Thread.sleep(TestUtil.generateRandomInteger() * 1000);
-        TestUtil.printString("jump min step is:" + jump(jumpArray));
+//        Thread.sleep(TestUtil.generateRandomInteger() * 1000);
+        TestUtil.printString("jump min step is:" + officialJump(jumpArray));
     }
 }
