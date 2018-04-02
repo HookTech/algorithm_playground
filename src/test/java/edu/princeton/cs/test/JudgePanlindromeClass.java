@@ -132,6 +132,7 @@ public class JudgePanlindromeClass implements ListPCallMethod {
 
     @Override
     public void callListPCallAlgoMethod() {
+        TestUtil.printString("++++++++++++++++ judgePalindromeTest ++++++++++++++++");
         prepareTestData();
         judgePalindromeTest();
     }

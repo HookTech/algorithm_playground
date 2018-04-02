@@ -47,12 +47,12 @@ public class JumpGameClass implements RecursionAndDinamicCallMethod{
 
     @Override
     public void callRecursionAndDinamicAlgoMethod() {
-        TestUtil.printString("++++++++++++++++ jumpGame ++++++++++++++++");
-        jumpGame();
+        TestUtil.printString("++++++++++++++++ jumpGameTest ++++++++++++++++");
+        jumpGameTest();
     }
 
     @Test(groups = RecursionAndDinamicCallMethod.testBaseName)
-    public void jumpGame() {
+    public void jumpGameTest() {
         int[] jumpArray = new int[]{3,-1,5,3,0,2,1,1};
         TestUtil.printString("jump arr is:");
         TestUtil.printIntArray(jumpArray);
