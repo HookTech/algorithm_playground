@@ -47,20 +47,15 @@ public class JumpGameClass implements RecursionAndDinamicCallMethod{
 
     @Override
     public void callRecursionAndDinamicAlgoMethod() {
-        try {
-            TestUtil.printString("++++++++++++++++ jumpGame ++++++++++++++++");
-            jumpGame();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TestUtil.printString("++++++++++++++++ jumpGame ++++++++++++++++");
+        jumpGame();
     }
 
     @Test(groups = RecursionAndDinamicCallMethod.testBaseName)
-    public void jumpGame() throws InterruptedException {
+    public void jumpGame() {
         int[] jumpArray = new int[]{3,-1,5,3,0,2,1,1};
         TestUtil.printString("jump arr is:");
         TestUtil.printIntArray(jumpArray);
-//        Thread.sleep(TestUtil.generateRandomInteger() * 1000);
         TestUtil.printString("jump min step is:" + officialJump(jumpArray));
     }
 }

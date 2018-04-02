@@ -1,5 +1,7 @@
 package edu.princeton.cs.test;
 
+import org.testng.Assert;
+
 import java.util.Random;
 import java.util.Stack;
 
@@ -56,5 +58,10 @@ public class TestUtil {
 
     public static int generateRandomInteger(){
         return random.nextInt(3);
+    }
+
+    public static void assertEqualAndPrintToInfo(Object actual,Object expected){
+        Assert.assertEquals(actual,expected);
+        printString("result is " + expected.toString());
     }
 }
