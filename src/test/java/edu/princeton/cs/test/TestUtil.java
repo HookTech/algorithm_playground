@@ -62,6 +62,6 @@ public class TestUtil {
 
     public static void assertEqualAndPrintToInfo(Object actual,Object expected){
         Assert.assertEquals(actual,expected);
-        printString("result is " + expected.toString());
+        printString("result is '" + expected.toString() + "'");
     }
 }

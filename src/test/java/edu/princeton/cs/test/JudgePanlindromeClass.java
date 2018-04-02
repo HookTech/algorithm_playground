@@ -17,7 +17,7 @@ public class JudgePanlindromeClass implements ListPCallMethod {
     private Node<Integer> nonePalindromeNode;
 
     /*** self practice function **/
-    private boolean selfIsPalindrome(Node<Integer> node){
+    private boolean selfIsPalindrome1(Node<Integer> node){
         Stack<Integer> mirrorSk = new Stack<>();
         Node<Integer> compareNode = node;
         while (node != null){
@@ -31,6 +31,105 @@ public class JudgePanlindromeClass implements ListPCallMethod {
         return true;
     }
 
+    //time:O(N),space:O(1); cpu's cost replace space cost
+    private boolean selfIsPalindrome2(Node<Integer> node){
+        Node<Integer> right = node;
+        Node<Integer> left = node;
+        while (node.next != null && right.next != null && right.next.next != null){
+            node = node.next;
+            right = right.next.next;
+        }
+        if(right.next == null){//node is the mid
+            right = reverseLinkList(node);
+            Node<Integer> leftHead = left;
+            Node<Integer> rightHead = right;
+            while (left != null && right != null){
+                if(left.value != right.value) {
+                    reverseLinkList(rightHead);
+                    node = leftHead;
+                    return false;
+                }
+                left = left.next;
+                right = right.next;
+            }
+            reverseLinkList(rightHead);
+            node = leftHead;
+            return true;
+        }
+        else {//null node is the mid
+            right = reverseLinkList(node.next);
+            node.next = null;
+            Node<Integer> leftHead = left;
+            Node<Integer> rightHead = right;
+            while (left != null && right != null){
+                if(left.value != right.value) {
+                    node.next = reverseLinkList(rightHead);
+                    node = leftHead;
+                    return false;
+                }
+                left = left.next;
+                right = right.next;
+            }
+            node.next = reverseLinkList(rightHead);
+            node = leftHead;
+            return true;
+        }
+    }
+
+    private boolean officialIsPalindrome(Node<Integer> head){
+        if(head == null || head.next == null){return  true;}
+        Node<Integer> n1 = head;
+        Node<Integer> n2 = head;
+        while (n2.next != null && n2.next.next != null){//search for middle node
+            n1 = n1.next;//mid
+            n2 = n2.next.next;//tail
+        }
+        n2 = n1.next;//n2 -> first node on right part
+        n1.next = null;//mid.next -> null
+        Node<Integer> n3 = null;
+        while (n2 != null){//reverse right part
+            n3 = n2.next;
+            n2.next = n1;
+            n1 = n2;
+            n2 = n3;
+        }
+        n3 = n1;
+        n2 = head;
+        boolean res = true;
+        while (n1 != null && n2 != null){
+            if(n1.value != n2.value){
+                res = false;
+                break;
+            }
+            n1 = n1.next;
+            n2 = n2.next;
+        }
+        n1 = n3.next;
+        n3.next = null;
+        while (n1 != null){
+            n2 = n1.next;
+            n1.next = n3;
+            n3 = n1;
+            n1 = n2;
+        }
+        return res;
+    }
+
+    private Node<Integer> reverseLinkList(Node<Integer> head){
+        if(head == null) {return null;}
+        Node<Integer> curr = head;
+        Node<Integer> prev = null;
+        Node<Integer> fur = curr.next;
+        while (fur != null){
+            curr.next = prev;
+            prev = curr;
+            curr = fur;
+            fur = fur.next;
+        }
+        curr.next = prev;
+        return curr;
+    }
+
     @Override
     public void callListPCallAlgoMethod() {
         prepareTestData();
@@ -41,11 +140,15 @@ public class JudgePanlindromeClass implements ListPCallMethod {
     public void judgePalindromeTest(){
         TestUtil.printString("palindrome list for test is:");
         TestUtil.printList(palindromeNode);
-        TestUtil.assertEqualAndPrintToInfo(selfIsPalindrome(palindromeNode),true);
+        TestUtil.assertEqualAndPrintToInfo(officialIsPalindrome(palindromeNode),true);
+        TestUtil.printString("after judge, the list is not be changed");
+        TestUtil.printList(palindromeNode);
 
         TestUtil.printString("non-Palindrome list for test is:");
         TestUtil.printList(nonePalindromeNode);
-        TestUtil.assertEqualAndPrintToInfo(selfIsPalindrome(nonePalindromeNode),false);
+        TestUtil.assertEqualAndPrintToInfo(officialIsPalindrome(nonePalindromeNode),false);
+        TestUtil.printString("after judge, the list is not be changed");
+        TestUtil.printList(nonePalindromeNode);
     }
 
     @BeforeMethod(groups = ListPCallMethod.testBaseName)
