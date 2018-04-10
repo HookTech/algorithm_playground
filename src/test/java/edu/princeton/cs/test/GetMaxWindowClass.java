@@ -69,16 +69,12 @@ public class GetMaxWindowClass implements StackAndQueueCallMethod {
 
     @Override
     public void callStackAndQueueAlgoMethod() {
-        try {
-            TestUtil.printString("++++++++++++++++ getMaxWindowTest ++++++++++++++++");
-            getMaxWindowTest();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TestUtil.printString("++++++++++++++++ getMaxWindowTest ++++++++++++++++");
+        getMaxWindowTest();
     }
 
     @Test(groups = StackAndQueueCallMethod.testBaseName)
-    public void getMaxWindowTest() throws InterruptedException {
+    public void getMaxWindowTest() {
         TestUtil.printString("array is:");
         TestUtil.printIntArray(new int[]{4,3,5,4,6,3,6,7});
         TestUtil.printString("window length is 3:");
