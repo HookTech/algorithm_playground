@@ -1,7 +1,10 @@
 package edu.princeton.cs.test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -25,6 +28,10 @@ public class TestUtil {
         out.println(ss);
     }
 
+    public static void printInt(int num){
+        printString(String.valueOf(num));
+    }
+
     public static void printBoolean(boolean bool){
         out.println(bool);
     }
@@ -36,6 +43,14 @@ public class TestUtil {
             head = head.next;
         }
         printString(sb.deleteCharAt(sb.length() - 1).toString());
+    }
+
+    public static <K,V> void printMap(Map<K,V> map){
+        try {
+            printString(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String recursionString(Stack<Integer> sk){
