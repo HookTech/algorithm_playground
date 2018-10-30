@@ -12,7 +12,7 @@ public class LongestConsecutiveClass implements RecursionAndDinamicCallMethod {
 
     @Override
     public void callRecursionAndDinamicAlgoMethod() {
-        TestUtil.printString("++++++++++++++++ jumpGameTest ++++++++++++++++");
+        TestUtil.printString("++++++++++++++++ longestConsecutiveTest ++++++++++++++++");
         longestConsecutiveTest();
     }
 
