@@ -1,5 +1,7 @@
-package edu.princeton.cs.test;
+package edu.princeton.cs.test.quickCoding.list;
 
+import edu.princeton.cs.test.ListPCallMethod;
+import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +14,7 @@ import static edu.princeton.cs.test.CommonStructure.Node;
  * @author philo
  * @create 2018-03-27 9:26 AM
  **/
-public class AddListClass implements ListPCallMethod{
+public class AddListClass implements ListPCallMethod {
 
     Node<Integer> head1,head2;
 

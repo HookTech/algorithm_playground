@@ -3,6 +3,7 @@ package edu.princeton.cs.test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.Map;
 import java.util.Random;
@@ -37,6 +38,7 @@ public class TestUtil {
     }
 
     public static <T> void printList(Node<T> head){
+        if(head == null) return;
         StringBuilder sb = new StringBuilder();
         while (null != head){
             sb.append(head.value).append(separator);
@@ -78,5 +80,36 @@ public class TestUtil {
     public static void assertEqualAndPrintToInfo(Object actual,Object expected){
         Assert.assertEquals(actual,expected);
         printString("result is '" + expected.toString() + "'");
+    }
+
+    public static <T> Node<T> generateListFromSeries(T... items){
+        if(items.length ==0){return null;}
+        Node<T> cur = new Node<>(items[0]), head = cur;
+        for (int i = 1; i < items.length; i++) {
+            cur.next = new Node<>(items[i]);
+            cur = cur.next;
+        }
+        return head;
+    }
+
+    public static <T> void assertList(Node<T> list, T... items) throws Exception {
+        if(list == null || items.length ==0){throw new Exception("list must not be null OR items must have value!");}
+        int i = 0;
+        while (list != null && i < items.length){
+            Assert.assertEquals(list.value, (items[i]));
+            list = list.next; i++;
+        }
+        Assert.assertTrue(i == items.length);
+    }
+
+    @Test
+    public void generateListFromSeriesTest(){
+        printList(generateListFromSeries(5,4,6,2,3,7));
+        printList(generateListFromSeries());
+    }
+
+    @Test
+    public void assertListTestYes() throws Exception {
+        assertList(generateListFromSeries(4,5,6),4,5,6);
     }
 }

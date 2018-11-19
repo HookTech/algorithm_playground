@@ -1,4 +1,4 @@
-package edu.princeton.cs.test.quickCoding;
+package edu.princeton.cs.test.quickCoding.list;
 
 import static edu.princeton.cs.test.CommonStructure.Node;
 import edu.princeton.cs.test.ListPCallMethod;
