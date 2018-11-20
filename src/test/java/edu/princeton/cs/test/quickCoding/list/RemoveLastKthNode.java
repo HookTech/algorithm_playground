@@ -12,10 +12,10 @@ public class RemoveLastKthNode implements ListPCallMethod {
 
     }
 
-    @Test(groups = {"broken"})
+    @Test()
     public void removeLastKthNodeTest() throws Exception {
         Node<Integer> head = TestUtil.generateListFromSeries(1,2,3,4,5);
-        TestUtil.assertList(removeLastKthNode(head, 3), 1,2,4,5);
+        TestUtil.assertList(removeLastKthNode(head, 4), 1,3,4,5);
 
         head = TestUtil.generateListFromSeries(1,2,3,4,5);
         TestUtil.assertList(removeLastKthNode(head,1), 1,2,3,4);
@@ -31,17 +31,17 @@ public class RemoveLastKthNode implements ListPCallMethod {
     private Node<Integer> removeLastKthNode(Node<Integer> head, Integer K) throws Exception {
         Node<Integer> del = head, save = head;
         if(K < 0){throw new Exception("K must be positive num");}
+        if(K == 0){return save;}
         //iterate to the end
-        while (del.next != null){
+        while (del != null){
             K--;
             del = del.next;
         }
-        if(K > 1){throw new Exception("K must be less than list's length");}
-        else if(K == 0){head = head.next;}
+        if(K > 0){throw new Exception("K must be less than list's length");}
+        else if(K == 0){save = head.next;}
         else{
             del = head;
-            while (K != 0){
-                K++;
+            while ( ++K != 0){
                 del = del.next;
             }
             Node<Integer> pre = del;
