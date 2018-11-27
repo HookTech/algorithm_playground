@@ -92,6 +92,17 @@ public class TestUtil {
         return head;
     }
 
+    public static <T> Node<T> generateCircleListFromSeries(T... items){
+        if(items.length ==0){return null;}
+        Node<T> cur = new Node<>(items[0]), head = cur;
+        for (int i = 1; i < items.length; i++) {
+            cur.next = new Node<>(items[i]);
+            cur = cur.next;
+        }
+        cur.next = head;
+        return head;
+    }
+
     public static <T> void assertList(Node<T> list, T... items) throws Exception {
         if(list == null || items.length ==0){throw new Exception("list must not be null OR items must have value!");}
         int i = 0;
