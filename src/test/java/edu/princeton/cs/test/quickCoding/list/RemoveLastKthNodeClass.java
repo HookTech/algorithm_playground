@@ -5,7 +5,7 @@ import edu.princeton.cs.test.ListPCallMethod;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
 
-public class RemoveLastKthNode implements ListPCallMethod {
+public class RemoveLastKthNodeClass implements ListPCallMethod {
 
     @Override
     public void callListPCallAlgoMethod() {
