@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static ps.philo.playground.CommonStructure.*;
 
 import java.util.Map;
 import java.util.Random;
@@ -35,16 +36,6 @@ public class TestUtil {
 
     public static void printBoolean(boolean bool){
         out.println(bool);
-    }
-
-    public static <T> void printList(ListNode<T> head){
-        if(head == null) return;
-        StringBuilder sb = new StringBuilder();
-        while (null != head){
-            sb.append(head.value).append(separator);
-            head = head.next;
-        }
-        printString(sb.deleteCharAt(sb.length() - 1).toString());
     }
 
     public static <K,V> void printMap(Map<K,V> map){
@@ -111,6 +102,26 @@ public class TestUtil {
             list = list.next; i++;
         }
         Assert.assertTrue(i == items.length);
+    }
+
+    public static <T> void printList(ListNode<T> head){
+        if(head == null) return;
+        StringBuilder sb = new StringBuilder();
+        while (null != head){
+            sb.append(head.value).append(separator);
+            head = head.next;
+        }
+        printString(sb.deleteCharAt(sb.length() - 1).toString());
+    }
+
+    public static String printTree(TreeNode<String> treeRoot){
+        if(treeRoot == null) return "";
+        StringBuilder builder = new StringBuilder();
+        builder.append("    ").append(treeRoot.value).append("\n").append("\n").append("  ").append("/").append("   ").append("\\").append("\n")
+                .append(" ").append(printTree(treeRoot.left))
+                .append("    ")
+                .append(printTree(treeRoot.right)).append("\n");
+        return builder.toString();
     }
 
     @Test

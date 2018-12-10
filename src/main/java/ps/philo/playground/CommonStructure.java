@@ -19,5 +19,10 @@ public class CommonStructure {
         public T value;
         public TreeNode<T> left;
         public TreeNode<T> right;
+        public TreeNode(T v, TreeNode l, TreeNode r){
+            this.value = v;
+            this.left = l;
+            this.right = r;
+        }
     }
 }
