@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.Stack;
 
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 
 /**
  * 两个单链表生成相加链表问题
@@ -16,16 +16,16 @@ import static edu.princeton.cs.test.CommonStructure.Node;
  **/
 public class AddListClass implements ListPCallMethod {
 
-    Node<Integer> head1,head2;
+    ListNode<Integer> head1,head2;
 
     /*** self practice function **/
-    private Node<Integer> selfAddLists(Node<Integer> head1, Node<Integer> head2){
+    private ListNode<Integer> selfAddLists(ListNode<Integer> head1, ListNode<Integer> head2){
         if(head1 == null || head2 == null) return null;
         Stack<Integer> s1 = new Stack<>();
         Stack<Integer> s2 = new Stack<>();
         Stack<Integer> ss = new Stack<>();
-        Node<Integer> pointer1 = head1;
-        Node<Integer> pointer2 = head2;
+        ListNode<Integer> pointer1 = head1;
+        ListNode<Integer> pointer2 = head2;
         while (null != pointer1){
             if(pointer1.value > 9 || pointer1.value < 0) return null;
             s1.push(pointer1.value);
@@ -36,7 +36,7 @@ public class AddListClass implements ListPCallMethod {
             s2.push(pointer2.value);
             pointer2 = pointer2.next;
         }
-        Node<Integer> resHead = null;//final result head
+        ListNode<Integer> resHead = null;//final result head
         int ca = 0;//next time, default zero
         while (true){
             if(s1.empty() && s2.empty()) {break;}
@@ -51,16 +51,16 @@ public class AddListClass implements ListPCallMethod {
                 ca = 0;
             }
         }
-        resHead = new Node<Integer>((1 == ca) ? 1 : ss.pop());
-        Node<Integer> cur = resHead;
+        resHead = new ListNode<Integer>((1 == ca) ? 1 : ss.pop());
+        ListNode<Integer> cur = resHead;
         while (null != cur && !ss.empty()){
-            cur.next = new Node<Integer>(ss.pop());
+            cur.next = new ListNode<Integer>(ss.pop());
             cur = cur.next;
         }
         return resHead;
     }
     /*** official resolve **/
-    private Node<Integer> officialAddLists(Node<Integer> head1, Node<Integer> head2){
+    private ListNode<Integer> officialAddLists(ListNode<Integer> head1, ListNode<Integer> head2){
         Stack<Integer> s1 = new Stack<>();
         Stack<Integer> s2 = new Stack<>();
         while(head1 != null){
@@ -72,20 +72,20 @@ public class AddListClass implements ListPCallMethod {
             head2 = head2.next;
         }
         int ca = 0;int n1 = 0;int n2 = 0;int n = 0;
-        Node<Integer> node = null;
-        Node<Integer> pre = null;
+        ListNode<Integer> node = null;
+        ListNode<Integer> pre = null;
         while (!s1.isEmpty() || !s2.isEmpty()){
             n1 = s1.isEmpty() ? 0 : s1.pop();
             n2 = s2.isEmpty() ? 0 : s2.pop();
             n = n1 + n2 + ca;
             pre = node;
-            node = new Node<>(n % 10);
+            node = new ListNode<>(n % 10);
             node.next = pre;
             ca = n / 10;
         }
         if(ca == 1){
             pre = node;
-            node = new Node(1);
+            node = new ListNode(1);
             node.next = pre;
         }
         return node;
@@ -110,15 +110,15 @@ public class AddListClass implements ListPCallMethod {
 
     @BeforeMethod(groups = ListPCallMethod.testBaseName)
     public void prepareTestData(){
-        head1 = new Node<>(1);
-        head2 = new Node<>(2);
-        Node<Integer> bodyNext1 = head1;
-        Node<Integer> bodyNext2 = head2;
+        head1 = new ListNode<>(1);
+        head2 = new ListNode<>(2);
+        ListNode<Integer> bodyNext1 = head1;
+        ListNode<Integer> bodyNext2 = head2;
         for(int i = 2; i < 9; i++,bodyNext1 = bodyNext1.next){
-            bodyNext1.next = new Node<>(i);
+            bodyNext1.next = new ListNode<>(i);
         }
         for(int i = 3; i < 10; i++,bodyNext2 = bodyNext2.next){
-            bodyNext2.next = new Node<>(i);
+            bodyNext2.next = new ListNode<>(i);
         }
     }
 }

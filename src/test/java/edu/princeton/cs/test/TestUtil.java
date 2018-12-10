@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import static java.lang.System.out;
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 
 public class TestUtil {
     private static char separator = ',';
@@ -37,7 +37,7 @@ public class TestUtil {
         out.println(bool);
     }
 
-    public static <T> void printList(Node<T> head){
+    public static <T> void printList(ListNode<T> head){
         if(head == null) return;
         StringBuilder sb = new StringBuilder();
         while (null != head){
@@ -82,28 +82,28 @@ public class TestUtil {
         printString("result is '" + expected.toString() + "'");
     }
 
-    public static <T> Node<T> generateListFromSeries(T... items){
+    public static <T> ListNode<T> generateListFromSeries(T... items){
         if(items.length ==0){return null;}
-        Node<T> cur = new Node<>(items[0]), head = cur;
+        ListNode<T> cur = new ListNode<>(items[0]), head = cur;
         for (int i = 1; i < items.length; i++) {
-            cur.next = new Node<>(items[i]);
+            cur.next = new ListNode<>(items[i]);
             cur = cur.next;
         }
         return head;
     }
 
-    public static <T> Node<T> generateCircleListFromSeries(T... items){
+    public static <T> ListNode<T> generateCircleListFromSeries(T... items){
         if(items.length ==0){return null;}
-        Node<T> cur = new Node<>(items[0]), head = cur;
+        ListNode<T> cur = new ListNode<>(items[0]), head = cur;
         for (int i = 1; i < items.length; i++) {
-            cur.next = new Node<>(items[i]);
+            cur.next = new ListNode<>(items[i]);
             cur = cur.next;
         }
         cur.next = head;
         return head;
     }
 
-    public static <T> void assertList(Node<T> list, T... items) throws Exception {
+    public static <T> void assertList(ListNode<T> list, T... items) throws Exception {
         if(list == null || items.length ==0){throw new Exception("list must not be null OR items must have value!");}
         int i = 0;
         while (list != null && i < items.length){

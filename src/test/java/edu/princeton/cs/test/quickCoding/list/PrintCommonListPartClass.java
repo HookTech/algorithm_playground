@@ -1,6 +1,6 @@
 package edu.princeton.cs.test.quickCoding.list;
 
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 import edu.princeton.cs.test.ListPCallMethod;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * */
 public class PrintCommonListPartClass implements ListPCallMethod {
 
-    Node<Integer> head1,head2;
+    ListNode<Integer> head1,head2;
 
     @Override
     public void callListPCallAlgoMethod() {
@@ -19,15 +19,15 @@ public class PrintCommonListPartClass implements ListPCallMethod {
 
     @Test
     public void printCommonListPartTest(){
-        head1 = new Node<>(1);
-        head2 = new Node<>(2);
-        Node<Integer> bodyNext1 = head1;
-        Node<Integer> bodyNext2 = head2;
+        head1 = new ListNode<>(1);
+        head2 = new ListNode<>(2);
+        ListNode<Integer> bodyNext1 = head1;
+        ListNode<Integer> bodyNext2 = head2;
         for(int i = 2; i < 8; i++,bodyNext1 = bodyNext1.next){
-            bodyNext1.next = new Node<>(i);
+            bodyNext1.next = new ListNode<>(i);
         }
         for(int i = 3; i < 10; i++,bodyNext2 = bodyNext2.next){
-            bodyNext2.next = new Node<>(i);
+            bodyNext2.next = new ListNode<>(i);
         }
         TestUtil.printString("List1");
         TestUtil.printList(head1);
@@ -37,7 +37,7 @@ public class PrintCommonListPartClass implements ListPCallMethod {
         printCommonPart(head1,head2);
     }
 
-    public void printCommonPart(Node<Integer> head1, Node<Integer> head2){
+    public void printCommonPart(ListNode<Integer> head1, ListNode<Integer> head2){
         StringBuilder builder = new StringBuilder();
         while (head1 != null && head2 != null){
             if(head1.value.equals(head2.value)) {

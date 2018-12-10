@@ -1,6 +1,6 @@
 package edu.princeton.cs.test.quickCoding.list;
 
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 import edu.princeton.cs.test.ListPCallMethod;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.Assert;
@@ -14,15 +14,15 @@ public class JosephusRingProblem  implements ListPCallMethod {
 
     @Test
     public void JosephusRingProblemTest() throws Exception {
-        Node<Integer> head1 = TestUtil.generateCircleListFromSeries(1,2,3,4,5);
-        Node<Integer> head2 = TestUtil.generateCircleListFromSeries(1,2,3,4);
-        Node<Integer> head3 = TestUtil.generateCircleListFromSeries(1);
+        ListNode<Integer> head1 = TestUtil.generateCircleListFromSeries(1,2,3,4,5);
+        ListNode<Integer> head2 = TestUtil.generateCircleListFromSeries(1,2,3,4);
+        ListNode<Integer> head3 = TestUtil.generateCircleListFromSeries(1);
         Assert.assertEquals(kill(head1,1).value, new Integer(4));
         Assert.assertEquals(kill(head2,1).value, new Integer(1));
         Assert.assertEquals(kill(head3,1).value, new Integer(1));
     }
 
-    private <T> Node<T> kill(Node<T> head, int m) throws Exception {
+    private <T> ListNode<T> kill(ListNode<T> head, int m) throws Exception {
         if(head == null || head.next == null || m < 0 || m > 2){
             throw new Exception("Wrong Input!");
         }

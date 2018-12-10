@@ -1,5 +1,7 @@
 package ps.philo.playground;
 
+import static ps.philo.playground.CommonStructure.TreeNode;
+
 /**
  * playground for optimal binary search tree problem
  * */
@@ -19,9 +21,9 @@ public class OptimalBinarySearchTree {
      * @param q dummy key node's cost array
      * @param n input's range
      * */
-    public void optimalBST(float[] p, float[] q, int n) throws ExceptionInInitializerError{
-        if(n != this.n||p.length != n||q.length != n+1) throw new ExceptionInInitializerError();
-        float[][] w = new float[n + 2][n + 2];//w[1..n+1,0..n]
+    public OptimalBinarySearchTree optimalBST(float[] p, float[] q, int n) throws ExceptionInInitializerError{
+        if(n != this.n||p.length != n+1||q.length != n+1) throw new ExceptionInInitializerError();
+        float[][] w = new float[n + 2][n + 1];//w[1..n+1,0..n]
         for (int i = 1; i <= n + 1; i++) {
             e[i][i-1]=q[i-1];
             w[i][i-1]=q[i-1];
@@ -41,13 +43,18 @@ public class OptimalBinarySearchTree {
                 }
             }
         }
+        return this;
     }
 
     /**
      * clear BST
      * */
     public void reInit(){
-        e = new float[n + 2][n + 2];//e[1..n+1,0..n]
+        e = new float[n+2][n+1];//e[1..n+1,0..n]
         root = new float[n+1][n+1];//root[1..n,1..n]
+    }
+
+    public TreeNode constructOptimalBST(){
+        return null;
     }
 }

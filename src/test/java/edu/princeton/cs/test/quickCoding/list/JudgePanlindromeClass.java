@@ -6,7 +6,7 @@ import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 
 /**
  * 判断一个链表是否是回文结构
@@ -15,13 +15,13 @@ import static edu.princeton.cs.test.CommonStructure.Node;
  * @create 2018-04-02 9:33 AM
  **/
 public class JudgePanlindromeClass implements ListPCallMethod {
-    private Node<Integer> palindromeNode;
-    private Node<Integer> nonePalindromeNode;
+    private ListNode<Integer> palindromeNode;
+    private ListNode<Integer> nonePalindromeNode;
 
     /*** self practice function **/
-    private boolean selfIsPalindrome1(Node<Integer> node){
+    private boolean selfIsPalindrome1(ListNode<Integer> node){
         Stack<Integer> mirrorSk = new Stack<>();
-        Node<Integer> compareNode = node;
+        ListNode<Integer> compareNode = node;
         while (node != null){
             mirrorSk.push(node.value);
             node = node.next;
@@ -34,17 +34,17 @@ public class JudgePanlindromeClass implements ListPCallMethod {
     }
 
     //time:O(N),space:O(1); cpu's cost replace space cost
-    private boolean selfIsPalindrome2(Node<Integer> node){
-        Node<Integer> right = node;
-        Node<Integer> left = node;
+    private boolean selfIsPalindrome2(ListNode<Integer> node){
+        ListNode<Integer> right = node;
+        ListNode<Integer> left = node;
         while (node.next != null && right.next != null && right.next.next != null){
             node = node.next;
             right = right.next.next;
         }
         if(right.next == null){//node is the mid
             right = reverseLinkList(node);
-            Node<Integer> leftHead = left;
-            Node<Integer> rightHead = right;
+            ListNode<Integer> leftHead = left;
+            ListNode<Integer> rightHead = right;
             while (left != null && right != null){
                 if(left.value != right.value) {
                     reverseLinkList(rightHead);
@@ -61,8 +61,8 @@ public class JudgePanlindromeClass implements ListPCallMethod {
         else {//null node is the mid
             right = reverseLinkList(node.next);
             node.next = null;
-            Node<Integer> leftHead = left;
-            Node<Integer> rightHead = right;
+            ListNode<Integer> leftHead = left;
+            ListNode<Integer> rightHead = right;
             while (left != null && right != null){
                 if(left.value != right.value) {
                     node.next = reverseLinkList(rightHead);
@@ -78,17 +78,17 @@ public class JudgePanlindromeClass implements ListPCallMethod {
         }
     }
 
-    private boolean officialIsPalindrome(Node<Integer> head){
+    private boolean officialIsPalindrome(ListNode<Integer> head){
         if(head == null || head.next == null){return  true;}
-        Node<Integer> n1 = head;
-        Node<Integer> n2 = head;
+        ListNode<Integer> n1 = head;
+        ListNode<Integer> n2 = head;
         while (n2.next != null && n2.next.next != null){//search for middle node
             n1 = n1.next;//mid
             n2 = n2.next.next;//tail
         }
         n2 = n1.next;//n2 -> first node on right part
         n1.next = null;//mid.next -> null
-        Node<Integer> n3 = null;
+        ListNode<Integer> n3 = null;
         while (n2 != null){//reverse right part
             n3 = n2.next;
             n2.next = n1;
@@ -117,11 +117,11 @@ public class JudgePanlindromeClass implements ListPCallMethod {
         return res;
     }
 
-    private Node<Integer> reverseLinkList(Node<Integer> head){
+    private ListNode<Integer> reverseLinkList(ListNode<Integer> head){
         if(head == null) {return null;}
-        Node<Integer> curr = head;
-        Node<Integer> prev = null;
-        Node<Integer> fur = curr.next;
+        ListNode<Integer> curr = head;
+        ListNode<Integer> prev = null;
+        ListNode<Integer> fur = curr.next;
         while (fur != null){
             curr.next = prev;
             prev = curr;
@@ -156,20 +156,20 @@ public class JudgePanlindromeClass implements ListPCallMethod {
 
     @BeforeMethod(groups = ListPCallMethod.testBaseName)
     public void prepareTestData(){
-        palindromeNode = new Node<>(1);
-        Node<Integer> fur = palindromeNode;
-        palindromeNode.next = new Node<>(2);palindromeNode = palindromeNode.next;
-        palindromeNode.next = new Node<>(3);palindromeNode = palindromeNode.next;
-        palindromeNode.next = new Node<>(2);palindromeNode = palindromeNode.next;
-        palindromeNode.next = new Node<>(1);
+        palindromeNode = new ListNode<>(1);
+        ListNode<Integer> fur = palindromeNode;
+        palindromeNode.next = new ListNode<>(2);palindromeNode = palindromeNode.next;
+        palindromeNode.next = new ListNode<>(3);palindromeNode = palindromeNode.next;
+        palindromeNode.next = new ListNode<>(2);palindromeNode = palindromeNode.next;
+        palindromeNode.next = new ListNode<>(1);
         palindromeNode = fur;
 
-        nonePalindromeNode = new Node<>(1);
+        nonePalindromeNode = new ListNode<>(1);
         fur = nonePalindromeNode;
-        nonePalindromeNode.next = new Node<>(2);nonePalindromeNode = nonePalindromeNode.next;
-        nonePalindromeNode.next = new Node<>(3);nonePalindromeNode = nonePalindromeNode.next;
-        nonePalindromeNode.next = new Node<>(3);nonePalindromeNode = nonePalindromeNode.next;
-        nonePalindromeNode.next = new Node<>(1);
+        nonePalindromeNode.next = new ListNode<>(2);nonePalindromeNode = nonePalindromeNode.next;
+        nonePalindromeNode.next = new ListNode<>(3);nonePalindromeNode = nonePalindromeNode.next;
+        nonePalindromeNode.next = new ListNode<>(3);nonePalindromeNode = nonePalindromeNode.next;
+        nonePalindromeNode.next = new ListNode<>(1);
         nonePalindromeNode = fur;
     }
 }

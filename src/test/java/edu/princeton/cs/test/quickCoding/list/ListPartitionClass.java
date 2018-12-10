@@ -4,7 +4,7 @@ import edu.princeton.cs.test.ListPCallMethod;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
 
-import static edu.princeton.cs.test.CommonStructure.Node;
+import static ps.philo.playground.CommonStructure.ListNode;
 
 public class ListPartitionClass implements ListPCallMethod {
     @Override
@@ -14,30 +14,30 @@ public class ListPartitionClass implements ListPCallMethod {
 
     @Test
     public void listPartitionTest1() throws Exception {
-        Node<Integer> head = TestUtil.generateListFromSeries(9,0,4,5,1);
+        ListNode<Integer> head = TestUtil.generateListFromSeries(9,0,4,5,1);
         partition(head,new Integer(3));
         TestUtil.assertList(head, 0,1,4,5,9);
     }
 
     @Test
     public void listPartitionTest2() throws Exception{
-        Node<Integer> head = TestUtil.generateListFromSeries(1,6,7,2,3,3,0,0,8,1);
+        ListNode<Integer> head = TestUtil.generateListFromSeries(1,6,7,2,3,3,0,0,8,1);
         partition(head,new Integer(3));
         TestUtil.assertList(head,1,2,0,0,1,3,3,6,8,7);
     }
 
     @Test
     public void listPartitionTest3() throws Exception{
-        Node<Integer> head = TestUtil.generateListFromSeries(7,9,1,8,5,2,5);
+        ListNode<Integer> head = TestUtil.generateListFromSeries(7,9,1,8,5,2,5);
         partition(head,new Integer(5));
         TestUtil.assertList(head,1,2,5,5,9,7,8);
     }
 
-    private Node<Integer> partition(Node<Integer> head, Integer pivot){
+    private ListNode<Integer> partition(ListNode<Integer> head, Integer pivot){
         if(head == null || head.next == null) {return head;}
-        Node<Integer> keep = head;
-        Node<Integer> sPartition = head;
-        Node<Integer> firstPivot = null;
+        ListNode<Integer> keep = head;
+        ListNode<Integer> sPartition = head;
+        ListNode<Integer> firstPivot = null;
         while (sPartition.value < pivot){
             sPartition = sPartition.next;
             head = sPartition;
@@ -59,7 +59,7 @@ public class ListPartitionClass implements ListPCallMethod {
         return keep;
     }
 
-    private <T> void swap(Node<T> upStream, Node<T> downStream){
+    private <T> void swap(ListNode<T> upStream, ListNode<T> downStream){
         T tmp = downStream.value;
         downStream.value = upStream.value;
         upStream.value = tmp;
