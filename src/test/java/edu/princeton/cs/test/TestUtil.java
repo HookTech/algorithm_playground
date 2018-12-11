@@ -114,14 +114,8 @@ public class TestUtil {
         printString(sb.deleteCharAt(sb.length() - 1).toString());
     }
 
-    public static String printTree(TreeNode<String> treeRoot){
-        if(treeRoot == null) return "";
-        StringBuilder builder = new StringBuilder();
-        builder.append("    ").append(treeRoot.value).append("\n").append("\n").append("  ").append("/").append("   ").append("\\").append("\n")
-                .append(" ").append(printTree(treeRoot.left))
-                .append("    ")
-                .append(printTree(treeRoot.right)).append("\n");
-        return builder.toString();
+    public static void printTree(TreeNode<String> treeRoot){
+        printString(treeRoot.toString());
     }
 
     @Test

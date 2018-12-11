@@ -14,6 +14,6 @@ public class OptimalBinarySearchTreeTest {
         OptimalBinarySearchTree testTree = new OptimalBinarySearchTree(5);
         float[] p = new float[]{Float.MAX_VALUE,0.15F,0.10F,0.05F,0.10F,0.20F};
         float[] q = new float[]{0.05F,0.10F,0.05F,0.05F,0.05F,0.10F};
-        TestUtil.printString(TestUtil.printTree(testTree.optimalBST(p,q,5).constructOptimalBST()));
+        TestUtil.printTree(testTree.optimalBST(p,q,5).constructOptimalBST());
     }
 }
