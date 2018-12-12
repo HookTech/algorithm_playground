@@ -59,19 +59,20 @@ public class OptimalBinarySearchTree {
      * construct BST
      */
     public TreeNode<String> constructOptimalBST() {
-        return constructBST(root, 1, n);
+        return constructBST(root, 1, n, -1);
     }
 
-    private TreeNode<String> constructBST(int[][] rootArray, int firstIndex, int lastIndex) {
+    private TreeNode<String> constructBST(int[][] rootArray, int firstIndex, int lastIndex, int parentDepth) {
         if (firstIndex <= lastIndex) {
             int rootIndex = rootArray[firstIndex][lastIndex];
             return new TreeNode<>(
                     "K" + String.valueOf(rootIndex),
-                    constructBST(rootArray,firstIndex,rootIndex - 1),
-                    constructBST(rootArray,rootIndex + 1,lastIndex)
+                    constructBST(rootArray,firstIndex,rootIndex - 1, parentDepth + 1),
+                    constructBST(rootArray,rootIndex + 1,lastIndex, parentDepth + 1),
+                    parentDepth + 1
             );
         } else{
-            return new TreeNode<>("d" + String.valueOf(lastIndex),null,null);
+            return new TreeNode<>("d" + String.valueOf(lastIndex),null,null, ++parentDepth);
         }
     }
 }

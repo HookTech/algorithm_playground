@@ -1,5 +1,8 @@
 package ps.philo.playground;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /**
  * CommonStructure contains all kinds of class
  *
@@ -19,15 +22,44 @@ public class CommonStructure {
         public T value;
         public TreeNode<T> left;
         public TreeNode<T> right;
+        public int depth = 0;
         public TreeNode(T v, TreeNode l, TreeNode r){
             this.value = v;
             this.left = l;
             this.right = r;
         }
 
+        public TreeNode(T v, TreeNode l, TreeNode r, int d){
+            this(v, l, r);
+            this.depth = d;
+        }
+
         @Override
         public String toString() {
-            return preOrderTraversal(this);
+            Queue<TreeNode<T>> nodes = new ArrayDeque<>();
+            StringBuilder builder = new StringBuilder();
+            nodes.add(this);
+            while (!nodes.isEmpty()){
+                TreeNode<T> curNode = nodes.poll();
+                builder.append("  ").append(curNode.value).append("  -- ").append(curNode.depth)
+                        .append("\n");
+                addToQueue(nodes,curNode.left);
+                addToQueue(nodes,curNode.right);
+            }
+            return builder.toString();
+        }
+
+        private TreeNode<T> printWhiteSpace(StringBuilder builder, int count){
+            for (int i = 0; i < count; i++) {
+                builder.append(" ");
+            }
+            return this;
+        }
+
+        private <T> void addToQueue(Queue<TreeNode<T>> queue, TreeNode<T> item){
+            if(item != null){
+                queue.add(item);
+            }
         }
 
         private String preOrderTraversal(TreeNode<T> root){
@@ -69,4 +101,6 @@ public class CommonStructure {
             return builder.toString();
         }
     }
+
+
 }
