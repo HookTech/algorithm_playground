@@ -29,12 +29,8 @@ public class TestUtil {
         out.println(ss);
     }
 
-    public static void printInt(int num){
+    public static <T> void printT(T num){
         printString(String.valueOf(num));
-    }
-
-    public static void printBoolean(boolean bool){
-        out.println(bool);
     }
 
     public static <K,V> void printMap(Map<K,V> map){

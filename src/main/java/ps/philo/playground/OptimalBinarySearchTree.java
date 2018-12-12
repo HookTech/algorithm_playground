@@ -61,6 +61,12 @@ public class OptimalBinarySearchTree {
     public TreeNode<String> constructOptimalBST() {
         return constructBST(root, 1, n, -1);
     }
+    /**
+     * get optimal estimation
+     * */
+    public float getOptimalEstimation(){
+        return e[1][n];
+    }
 
     private TreeNode<String> constructBST(int[][] rootArray, int firstIndex, int lastIndex, int parentDepth) {
         if (firstIndex <= lastIndex) {
