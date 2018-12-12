@@ -4,14 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static ps.philo.playground.CommonStructure.*;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
 import static java.lang.System.out;
-import static ps.philo.playground.CommonStructure.ListNode;
+import static ps.philo.playground.CommonStructure.*;
 
 public class TestUtil {
     private static char separator = ',';
@@ -114,7 +113,7 @@ public class TestUtil {
         printString(sb.deleteCharAt(sb.length() - 1).toString());
     }
 
-    public static void printTree(TreeNode<String> treeRoot){
+    public static void printTree(Tree<String> treeRoot){
         printString(treeRoot.toString());
     }
 

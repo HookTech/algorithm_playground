@@ -34,34 +34,6 @@ public class CommonStructure {
             this.depth = d;
         }
 
-        @Override
-        public String toString() {
-            Queue<TreeNode<T>> nodes = new ArrayDeque<>();
-            StringBuilder builder = new StringBuilder();
-            nodes.add(this);
-            while (!nodes.isEmpty()){
-                TreeNode<T> curNode = nodes.poll();
-                builder.append("  ").append(curNode.value).append("  -- ").append(curNode.depth)
-                        .append("\n");
-                addToQueue(nodes,curNode.left);
-                addToQueue(nodes,curNode.right);
-            }
-            return builder.toString();
-        }
-
-        private TreeNode<T> printWhiteSpace(StringBuilder builder, int count){
-            for (int i = 0; i < count; i++) {
-                builder.append(" ");
-            }
-            return this;
-        }
-
-        private <T> void addToQueue(Queue<TreeNode<T>> queue, TreeNode<T> item){
-            if(item != null){
-                queue.add(item);
-            }
-        }
-
         private String preOrderTraversal(TreeNode<T> root){
             StringBuilder builder = new StringBuilder();
             if(root != null){
@@ -99,6 +71,43 @@ public class CommonStructure {
                         .append(left.toString()).append("   ").append(right.toString());
             }
             return builder.toString();
+        }
+    }
+
+    public static class Tree<T>{
+        TreeNode<T> root;
+        int maxDepth;
+
+        public Tree(TreeNode root, int maxDepth){
+            this.root = root;
+            this.maxDepth = maxDepth;
+        }
+
+        @Override
+        public String toString() {
+            Queue<TreeNode<T>> nodes = new ArrayDeque<>();
+            StringBuilder builder = new StringBuilder();
+            nodes.add(root);
+            while (!nodes.isEmpty()){
+                TreeNode<T> curNode = nodes.poll();
+                builder.append("  ").append(curNode.value).append("  -- ").append(curNode.depth)
+                        .append("\n");
+                addToQueue(nodes,curNode.left);
+                addToQueue(nodes,curNode.right);
+            }
+            return builder.toString();
+        }
+
+        private void printWhiteSpace(StringBuilder builder, int count){
+            for (int i = 0; i < count; i++) {
+                builder.append(" ");
+            }
+        }
+
+        private <T> void addToQueue(Queue<TreeNode<T>> queue, TreeNode<T> item){
+            if(item != null){
+                queue.add(item);
+            }
         }
     }
 
