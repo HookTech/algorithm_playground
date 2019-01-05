@@ -1,4 +1,4 @@
-package ps.philo.playground.test;
+package ps.philo.playground.play;
 
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
