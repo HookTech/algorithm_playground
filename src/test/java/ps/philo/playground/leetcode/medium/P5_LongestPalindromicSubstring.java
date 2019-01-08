@@ -31,16 +31,16 @@ public class P5_LongestPalindromicSubstring {
   public String longestPalindrome(String s) {
     if (s == null || s.isEmpty()) return "";
     int l = s.length();
-//		String[][] subs = new String[l + 1][l];
-    String[] subs = new String[l + 1];
+		String[][] subs = new String[l + 1][l];
+//    String[] subs = new String[2l  1];
     for (int k = 0; k < l; k++) {
-      subs[project(k, k, 0, l)] = s.substring(k, k + 1);
-      subs[project(k + 1, k, 0, l)] = "";
+      subs[k][k] = s.substring(k, k + 1);
+      subs[k+1][k] = "";
     }
     for (int g = 1; g < l; g++) {
       for (int i = 0; i < l - g; i++) {
         int j = i + g;
-        if (subs[project(i+1,j-1,g,l)].length() != j - i - 1) {
+        if (subs[i+1][j-1].length() != j - i - 1) {
           String left = subs[i][j - 1];
           String right = subs[i + 1][j];
           subs[i][j] = left.length() >= right.length() ? left : right;
