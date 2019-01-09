@@ -22,10 +22,11 @@ import org.testng.annotations.Test;
 public class P5_LongestPalindromicSubstring {
 	@Test
 	public void test() {
-		Assert.assertEquals(longestPalindrome("babad"), "aba");
+		Assert.assertEquals(longestPalindrome("babad"), "bab");
 		Assert.assertEquals(longestPalindrome("cbbd"), "bb");
-		Assert.assertEquals(longestPalindrome("abcda"), "b");
+		Assert.assertEquals(longestPalindrome("abcda"), "a");
 		Assert.assertEquals(longestPalindrome("abcaa"), "aa");
+		Assert.assertEquals(longestPalindrome("ffff" + "ggg"),"ffff");
 		final String res = "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
 			"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
 			"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
@@ -61,15 +62,9 @@ public class P5_LongestPalindromicSubstring {
 					if (s.charAt(i) == s.charAt(j)) {
 						compress[2 * i] = s.substring(i, j + 1);
 					} else {
-						if (compress[2 * i + 1].equals(s.substring(i, i + 1))) {
-							compress[2 * i] = compress[2 * i];
-						} else if (compress[2 * i + 1].equals(s.substring(j, j + 1))) {
-							compress[2 * i] = compress[2 * i + 2];
-						} else if (compress[2 * i + 1].equals("")) {
-							compress[2 * i] = s.substring(i, i + 1);
-						} else {
-							compress[2 * i] = compress[2 * i + 1];
-						}
+						String left = compress[2 * i];
+						String right = compress[2 * i + 2];
+						compress[2 * i] = left.length() >= right.length() ? left : right;
 					}
 				}
 				compress[2 * i + 1] = compress[2 * i + 2];
