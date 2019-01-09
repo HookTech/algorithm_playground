@@ -26,6 +26,20 @@ public class P5_LongestPalindromicSubstring {
 		Assert.assertEquals(longestPalindrome("cbbd"), "bb");
 		Assert.assertEquals(longestPalindrome("abcda"), "b");
 		Assert.assertEquals(longestPalindrome("abcaa"), "aa");
+		final String res = "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
+			"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
+			"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
+			"fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
+			"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" +
+			"fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+		final String other =
+			"gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
+			"ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
+			"gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
+			"gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
+			"gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg";
+		Assert.assertEquals(longestPalindrome(res+other),res);
+
 	}
 
 	public String longestPalindrome(String s) {
