@@ -24,6 +24,7 @@ public class P10_RegularExpressionMatching {
 		Assert.assertEquals(isMatchV2("ab", ".*"), true);
 		Assert.assertEquals(isMatchV2("aab", "c*a*b*"), true);
 		Assert.assertEquals(isMatchV2("mississippi", "mis*is*p*."), false);
+		Assert.assertEquals(isMatchV2("ab", ".*c"), false);
 	}
 
 	public boolean isMatchV1(String text, String pattern) {//Recursion approach
@@ -49,12 +50,19 @@ public class P10_RegularExpressionMatching {
 			return memo[i][j];
 		}
 		boolean ans;
-		if (i == text.length()) {
-			ans = j == pattern.length();
+		if (j == pattern.length()) {
+			ans = i == text.length();
+		} else {
+			boolean first_match = (i < text.length() && (text.charAt(i) == pattern.charAt(j) || pattern.charAt(j) == '.'));
+			if (j < pattern.length() - 1 && pattern.charAt(j + 1) == '*') {
+				ans = dp(i, j + 2, text, pattern, memo)
+					|| (first_match && dp(i + 1, j, text, pattern, memo));
+			} else {
+				ans = (first_match && dp(i + 1, j + 1, text, pattern, memo));
+			}
 		}
-		boolean first_match = (i < text.length() && text.charAt(i) == pattern.charAt(j) || pattern.charAt(j) == '.');
-		if (pattern.charAt(j + 1) == '*') {
-			return dp(i, j + 2, text, pattern, memo) || (first_match && dp(i + 1, j, text, pattern, memo));
-		}
+		memo[i][j] = ans;
+		return ans;
 	}
+
 }
