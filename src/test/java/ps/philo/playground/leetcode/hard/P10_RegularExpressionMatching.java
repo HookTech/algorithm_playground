@@ -9,12 +9,21 @@ import org.testng.annotations.Test;
  */
 public class P10_RegularExpressionMatching {
 	@Test
-	public void test() {
+	public void test1() {
 		Assert.assertEquals(isMatchV1("aa", "a"), false);
 		Assert.assertEquals(isMatchV1("aa", "a*"), true);
-		Assert.assertEquals(isMatchV1("ab",".*"),true);
-		Assert.assertEquals(isMatchV1("aab","c*a*b*"),true);
-		Assert.assertEquals(isMatchV1("mississippi","mis*is*p*."),false);
+		Assert.assertEquals(isMatchV1("ab", ".*"), true);
+		Assert.assertEquals(isMatchV1("aab", "c*a*b*"), true);
+		Assert.assertEquals(isMatchV1("mississippi", "mis*is*p*."), false);
+	}
+
+	@Test
+	public void test2() {
+		Assert.assertEquals(isMatchV2("aa", "a"), false);
+		Assert.assertEquals(isMatchV2("aa", "a*"), true);
+		Assert.assertEquals(isMatchV2("ab", ".*"), true);
+		Assert.assertEquals(isMatchV2("aab", "c*a*b*"), true);
+		Assert.assertEquals(isMatchV2("mississippi", "mis*is*p*."), false);
 	}
 
 	public boolean isMatchV1(String text, String pattern) {//Recursion approach
@@ -29,7 +38,23 @@ public class P10_RegularExpressionMatching {
 			return first_match && isMatchV1(text.substring(1), pattern.substring(1));
 		}
 	}
+
 	public boolean isMatchV2(String text, String pattern) {//Dynamic Programming approach
-		
+		Boolean[][] memo = new Boolean[text.length() + 1][pattern.length() + 1];
+		return dp(0, 0, text, pattern, memo);
+	}
+
+	public boolean dp(int i, int j, String text, String pattern, Boolean[][] memo) {
+		if (memo[i][j] != null) {
+			return memo[i][j];
+		}
+		boolean ans;
+		if (i == text.length()) {
+			ans = j == pattern.length();
+		}
+		boolean first_match = (i < text.length() && text.charAt(i) == pattern.charAt(j) || pattern.charAt(j) == '.');
+		if (pattern.charAt(j + 1) == '*') {
+			return dp(i, j + 2, text, pattern, memo) || (first_match && dp(i + 1, j, text, pattern, memo));
+		}
 	}
 }
