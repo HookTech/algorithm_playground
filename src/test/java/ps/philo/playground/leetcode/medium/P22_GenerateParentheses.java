@@ -4,7 +4,6 @@ import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,26 +13,58 @@ import java.util.List;
 public class P22_GenerateParentheses {
 
 	@Test
-	public void test(){
-		TestUtil.printCollections(generateParenthesisV1(2));
+	public void testV1(){
+		TestUtil.printCollections(generateParenthesisV1(3));
+	}
+
+	@Test
+	public void testV2(){
+		TestUtil.printCollections(generateParenthesisV2(3));
 	}
 
 	public List<String> generateParenthesisV1(int n) {//Brute Force
-		return generateStr(n);
+		List<String> combinations = new ArrayList();
+		generateAll(new char[2 * n], 0, combinations);
+		return combinations;
 	}
 
-	private List<String> generateStr(int n){
-		if(n == 0){
-			return Arrays.asList("");
+	private void generateAll(char[] current, int pos, List<String> result) {
+		if (pos == current.length) {
+			if (valid(current))
+				result.add(new String(current));
+		} else {
+			current[pos] = '(';
+			generateAll(current, pos+1, result);
+			current[pos] = ')';
+			generateAll(current, pos+1, result);
 		}
-		List<String> candidates = new ArrayList<>();
-		List<String> sub_candidates = generateStr(n - 1);
-		for (String ss : sub_candidates){
-			candidates.add("(" + ss + "(");
-			candidates.add("(" + ss + ")");
-			candidates.add(")" + ss + ")");
-			candidates.add(")" + ss + "(");
+	}
+
+	private boolean valid(char[] current) {
+		int balance = 0;
+		for (char c: current) {
+			if (c == '(') balance++;
+			else balance--;
+			if (balance < 0) return false;
 		}
-		return candidates;
+		return (balance == 0);
+	}
+
+	public List<String> generateParenthesisV2(int n) {//backTracking
+		List<String> ans = new ArrayList();
+		backtrack(ans, "", 0, 0, n);
+		return ans;
+	}
+
+	public void backtrack(List<String> ans, String cur, int open, int close, int max){
+		if (cur.length() == max * 2) {
+			ans.add(cur);
+			return;
+		}
+
+		if (open < max)
+			backtrack(ans, cur+"(", open+1, close, max);
+		if (close < open)
+			backtrack(ans, cur+")", open, close+1, max);
 	}
 }
