@@ -123,6 +123,14 @@ public class TestUtil {
 		printString(sb.deleteCharAt(sb.length() - 1).toString());
 	}
 
+	public static <T> void printCollections(Collection<T> collection){
+		StringBuilder sb = new StringBuilder();
+		for(Iterator<T> it = collection.iterator(); it.hasNext(); ){
+			sb.append(it.next()).append(",");
+		}
+		printString(sb.toString());
+	}
+
 	public static void printTree(Tree<String> treeRoot) {
 		printString(treeRoot.toString());
 	}
