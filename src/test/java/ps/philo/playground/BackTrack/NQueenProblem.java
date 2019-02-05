@@ -1,10 +1,19 @@
 package ps.philo.playground.BackTrack;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 /**
  * philo
  * # 2/1/19
  */
 public class NQueenProblem {
+
+	@Test
+	public void test(){
+		Assert.assertEquals(num(8), 92);
+	}
+
 	public int num(int n) {
 		if (n < 1) {
 			return 0;
