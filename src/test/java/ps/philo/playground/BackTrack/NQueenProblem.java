@@ -22,7 +22,7 @@ public class NQueenProblem {
 		return process(0, record, n);
 	}
 
-	public int process(int i, int[] record, int n) {
+	public int process(int i, int[] record, int n) {//backTracking
 		if (i == n) {
 			return 1;
 		}
