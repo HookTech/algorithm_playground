@@ -10,13 +10,16 @@ import org.testng.annotations.Test;
 public class KMPS {
 	@Test
 	public void test() {
-		KMP kmp = new KMPWithNextArray("abababca");
-		Assert.assertEquals(kmp.search("ababababca"), 2);
-		Assert.assertEquals(kmp.search("abadababca"), 10);
+		final String pattern = "ABABAC";
+		final String text = "BCBAABACAABABACAA";
 
-		kmp = new KMPWithDFA("abababca");
-		Assert.assertEquals(kmp.search("ababababca"), 2);
-		Assert.assertEquals(kmp.search("abadababca"), 10);
+		KMP kmp = new KMPWithNextArray(pattern);
+		Assert.assertEquals(kmp.search(text), 9);
+		Assert.assertEquals(kmp.search("BCBAABACAADABACAA"), 17);
+
+		kmp = new KMPWithDFA(pattern);
+		Assert.assertEquals(kmp.search(text), 9);
+		Assert.assertEquals(kmp.search("BCBAABACAADABACAA"), 17);
 	}
 
 	private static abstract class KMP {
@@ -29,6 +32,9 @@ public class KMPS {
 		}
 	}
 
+	/**
+	 * pattern using next array
+	 * */
 	private static class KMPWithNextArray extends KMP {
 		private int[] next;
 		private String pattern;
@@ -73,6 +79,9 @@ public class KMPS {
 		}
 	}
 
+	/**
+	 * advanced pattern using DFA
+	 * */
 	private static class KMPWithDFA extends KMP {
 		private final int R = 256;
 		private int[][] dfa;       // the KMP automoton
