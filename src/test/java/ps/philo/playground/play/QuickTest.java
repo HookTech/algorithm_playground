@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -25,7 +26,8 @@ public class QuickTest {
 
 	public int[] miniK(int[] input, int k) {
 		StdRandom.shuffle(input);
-		quickSort(input, 0, input.length - 1);
+//		quickSort(input, 0, input.length - 1);
+		simpleDualPivotQuickSort(input, 0, input.length - 1);
 		int[] mini = new int[k];
 		for (int i = 0; i < k; i++) {
 			mini[i] = input[i];
@@ -43,6 +45,23 @@ public class QuickTest {
 			mini[i] = pquene.poll();
 		}
 		return mini;
+	}
+
+	public void simpleDualPivotQuickSort(int[] input, int lo, int hi) {
+		if (lo >= hi) return;
+		int lt = lo, i = lo + 1, gt = hi;
+		int v = input[lo];
+		while (i <= gt) {
+			if (input[i] > v) {
+				swap(input, i, gt--);
+			} else if (input[i] < v) {
+				swap(input, i++, lt++);
+			} else {
+				i++;
+			}
+		}
+		simpleDualPivotQuickSort(input, lo, lt - 1);
+		simpleDualPivotQuickSort(input, gt + 1, hi);
 	}
 
 	public void quickSort(int[] a, int low, int high) {
