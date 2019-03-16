@@ -75,6 +75,13 @@ public class TestUtil {
 		printString("result is '" + expected.toString() + "'");
 	}
 
+	public static void assertEqualArray(int[] a, int[] b) {
+		Assert.assertEquals(a.length, b.length);
+		for (int i = 0; i < a.length; i++) {
+			Assert.assertEquals(a[i], b[i]);
+		}
+	}
+
 	public static <T> ListNode<T> generateListFromSeries(T... items) {
 		if (items.length == 0) {
 			return null;
@@ -123,9 +130,9 @@ public class TestUtil {
 		printString(sb.deleteCharAt(sb.length() - 1).toString());
 	}
 
-	public static <T> void printCollections(Collection<T> collection){
+	public static <T> void printCollections(Collection<T> collection) {
 		StringBuilder sb = new StringBuilder();
-		for(Iterator<T> it = collection.iterator(); it.hasNext(); ){
+		for (Iterator<T> it = collection.iterator(); it.hasNext(); ) {
 			sb.append(it.next()).append(",");
 		}
 		printString(sb.toString());
@@ -135,16 +142,16 @@ public class TestUtil {
 		printString(treeRoot.toString());
 	}
 
-	public static <E> boolean assertTwoContainSameElements(Collection<E> c1, Collection<E> c2){
-		if(c1.size() != c2.size()) return false;
+	public static <E> boolean assertTwoContainSameElements(Collection<E> c1, Collection<E> c2) {
+		if (c1.size() != c2.size()) return false;
 		Object[] obj1 = c1.toArray();
 		Object[] obj2 = c2.toArray();
 		Arrays.sort(obj1);
 		Arrays.sort(obj2);
 		Iterator<E> itr1 = c1.iterator();
 		Iterator<E> itr2 = c2.iterator();
-		while (itr1.hasNext()){
-			if(!itr1.next().equals(itr2.next())){
+		while (itr1.hasNext()) {
+			if (!itr1.next().equals(itr2.next())) {
 				return false;
 			}
 		}
