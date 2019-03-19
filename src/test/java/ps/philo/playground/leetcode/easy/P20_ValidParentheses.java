@@ -3,8 +3,6 @@ package ps.philo.playground.leetcode.easy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Stack;
-
 /**
  * philo
  * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -44,26 +42,23 @@ public class P20_ValidParentheses {
 	}
 
 	public boolean isValid(String s) {
-		Stack<Character> innerStack = new Stack<Character>();
-		for (int i = 0; i < s.length(); i++) {
-			char cc = s.charAt(i);
-			if (classify(cc)) innerStack.push(cc);
-			else if (innerStack.size() != 0) {
-				char p = innerStack.pop();
-				if (!pair(p, cc)) return false;
-			} else
-				return false;
+		char[] stack = new char[s.length()];
+		int head = 0;
+
+		for (char c: s.toCharArray()) {
+			if (c == '(') {
+				stack[head++] = ')';
+			} else if (c == '[') {
+				stack[head++] = ']';
+			} else if (c == '{') {
+				stack[head++] = '}';
+			} else {
+				if (head == 0 || stack[--head] != c) {
+					return false;
+				}
+			}
 		}
-		return innerStack.size() == 0;
-	}
+		return head == 0;
 
-	boolean classify(char cc) {
-		return (cc == '(' || cc == '{' || cc == '[');
-	}
-
-	boolean pair(char c1, char c2) {
-		return (c1 == '(' && c2 == ')')
-			|| (c1 == '{' && c2 == '}')
-			|| (c1 == '[' && c2 == ']');
 	}
 }
