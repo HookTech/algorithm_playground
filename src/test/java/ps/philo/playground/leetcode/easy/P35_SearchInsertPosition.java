@@ -43,7 +43,7 @@ public class P35_SearchInsertPosition {
 
 		Assert.assertEquals(
 			searchInsert(new int[]{1,3,5,6},5),
-			2t add
+			2
 		);
 	}
 
