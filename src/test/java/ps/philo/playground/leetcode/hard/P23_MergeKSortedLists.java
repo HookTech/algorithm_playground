@@ -18,6 +18,9 @@ import static ps.philo.playground.CommonStructure.ListNode;
  * 2->6
  * ]
  * Output: 1->1->2->3->4->4->5->6
+ *
+ * N stand for length of list array, M stand for average node length of each list
+ * the algorithm is N*lg(M)
  * # 3/21/19
  */
 public class P23_MergeKSortedLists {
