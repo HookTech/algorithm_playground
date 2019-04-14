@@ -1,5 +1,6 @@
 package ps.philo.playground.model.multiThread;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -7,12 +8,11 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * philo
  *
- * 编写一个Java应用程序，要求有三个进程：student1，student2，teacher，其中线程student1准备“睡”1分钟后再开始上课，线程student2准备“睡”5分钟后再开始上课。Teacher在输出4句“上课”后，“唤醒”了休眠的线程student1；线程student1被“唤醒”后，负责再“唤醒”休眠的线程student2.
+ * 编写一个Java应用程序，要求有三个进程：student1，student2，teacher，
+ * 其中线程student1准备“睡”1分钟后再开始上课，线程student2准备“睡”5分钟后再开始上课。
+ * Teacher在输出4句“上课”后，“唤醒”了休眠的线程student1；
+ * 线程student1被“唤醒”后，负责再“唤醒”休眠的线程student2.
  *
- * 作者：微笑面对生活
- * 链接：https://juejin.im/post/5b825a026fb9a019b66e3484
- * 来源：掘金
- * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  * # 4/14/19
  */
 public class ConditionScenario {
@@ -26,12 +26,20 @@ public class ConditionScenario {
 		lock.lock();
 		while (signal != 0){
 			try {
-				teacher.await();
+				teacher.await();//有可能老师线程先执行
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("老师叫上课");
+		int i = 4;
+		while (i-- > 0) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("上课");
+		}
 		signal++;
 		student1.signal();
 		lock.unlock();
@@ -40,13 +48,18 @@ public class ConditionScenario {
 		lock.lock();
 		while (signal != 1){
 			try {
-				student1.await();
+				student1.await(1, TimeUnit.MINUTES);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println("学生1醒了,准备叫醒学生2");
 		signal++;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		student2.signal();
 		lock.unlock();
 	}
@@ -54,7 +67,7 @@ public class ConditionScenario {
 		lock.lock();
 		while (signal != 2){
 			try {
-				student2.await();
+				student2.await(5,TimeUnit.MINUTES);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -67,8 +80,8 @@ public class ConditionScenario {
 
 	public static void main(String[] args) {
 		ConditionScenario ten = new ConditionScenario();
-		new Thread(() -> ten.teacher()).start();
 		new Thread(() -> ten.student1()).start();
 		new Thread(() -> ten.student2()).start();
+		new Thread(() -> ten.teacher()).start();
 	}
 }
