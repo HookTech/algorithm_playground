@@ -22,7 +22,7 @@ public class P24_SwapNodesInPairs {
 	public void test() throws Exception {
 		ListNode<Integer> head = TestUtil.generateListFromSeries(1,2,3,4);
 		TestUtil.assertList(
-			swapPairs(head),
+			swapPairsNew(head),
 			2,1,4,3
 		);
 
@@ -44,5 +44,22 @@ public class P24_SwapNodesInPairs {
 		p.next = gradeChild;
 		child.next = p;
 		return child;
+	}
+
+	public ListNode swapPairsNew(ListNode head) {
+		ListNode dump = new ListNode(0);
+		dump.next = head;
+		head = dump;
+		while (head.next != null
+			&& head.next.next != null) {
+			ListNode n1 = head.next;
+			ListNode n2 = head.next.next;
+			head.next = n2;
+			n1.next = n2.next;
+			n2.next = n1;
+			head = n1;
+
+		}
+		return dump.next;
 	}
 }

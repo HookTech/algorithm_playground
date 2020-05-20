@@ -3,16 +3,71 @@ package ps.philo.playground.play;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.test.TestUtil;
 import org.testng.annotations.Test;
+import ps.philo.playground.CommonStructure;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * philo
  * # 3/12/19
  */
 public class QuickTest {
+
+	@Test
+	public void testtt(){
+		System.out.println("Length of the longest substring: " + findLength("araaci", 2));
+		System.out.println("Length of the longest substring: " + findLength("araaci", 1));
+		System.out.println("Length of the longest substring: " + findLength("cbbebi", 3));
+	}
+
+	public static int findLength(String str, int k) {
+		// TODO: Write your code here
+		int startIndex=0;
+		int maxLength = 0;
+		Set<Character> distinct = new HashSet<>();
+		for(int endIndex=0;endIndex < str.length();endIndex++){
+			Character cc = str.charAt(endIndex);
+			if(!distinct.contains(cc)) {
+				distinct.add(cc);
+			}
+			while (distinct.size() > k){
+				cc = str.charAt(startIndex++);
+				if(distinct.contains(cc)){
+					distinct.remove(cc);
+				}
+			}
+			maxLength = Math.max(endIndex - startIndex + 1, maxLength);
+		}
+		return maxLength;
+	}
+
+	public boolean isPalindrome(CommonStructure.ListNode head) {
+		if(head == null || head.next == null) return true;
+		CommonStructure.ListNode slow = head, fast = head.next, pre = null, prepre = null;
+		while(fast != null && fast.next != null) {
+			//反转前半段链表
+			pre = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+			//先移动指针再来反转
+			pre.next = prepre;
+			prepre = pre;
+		}
+		CommonStructure.ListNode p2 = slow.next;
+		slow.next = pre;
+		CommonStructure.ListNode p1 = fast == null? slow.next : slow;
+		while(p1 != null) {
+			if(p1.value != p2.value)
+				return false;
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+		return true;
+	}
 
 	@Test
 	public void test() {
