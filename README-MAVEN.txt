@@ -52,15 +52,15 @@ Using Maven from the Windows Command Prompt
 Download and install Maven by following the instructions at
 https://maven.apache.org.
 
-Locate the installation directory for Maven, e.g., C:\<apache-maven-x-y-z>
+Locate the installation directory for Maven, e.g., C:\<apache-maven-num-y-z>
 
-Locate the installation directory for Java, e.g., C:\Program Files\Java\<JDK-x-y-z>
+Locate the installation directory for Java, e.g., C:\Program Files\Java\<JDK-num-y-z>
 
 Set the following environment variables:
 
-set JAVA_HOME=C:\Program Files\Java\<JDK-x-y-z>
+set JAVA_HOME=C:\Program Files\Java\<JDK-num-y-z>
 set PATH=%JAVA_HOME%\bin;%PATH%
-set M2_HOME=C:\<apache-maven-x-y-z>
+set M2_HOME=C:\<apache-maven-num-y-z>
 set PATH=%M2_HOME%\bin;%PATH%
 
 To create the algs4-<version>.jar package and install it in the local
@@ -81,15 +81,15 @@ Download and install Maven, either by using your favorite package
 manager  (such as apt-get) or by following the instructions at
 https://maven.apache.org.
 
-Locate the installation directory for Maven, e.g., /my/maven/<apache-maven-x-y-z>
+Locate the installation directory for Maven, e.g., /my/maven/<apache-maven-num-y-z>
 
-Locate the installation directory for Java, e.g., /my/java/<JDK-x-y-z->
+Locate the installation directory for Java, e.g., /my/java/<JDK-num-y-z->
 
 Set the following environment variables:
 
-export JAVA_HOME=/my/java/<JDK-x-y-z>
+export JAVA_HOME=/my/java/<JDK-num-y-z>
 export PATH=$JAVA_HOME/bin:$PATH
-export M2_HOME=/my/maven/<apache-maven-x-y-z>
+export M2_HOME=/my/maven/<apache-maven-num-y-z>
 export PATH=$M2_HOME/bin:$PATH
 
 To create the algs4-<version>.jar package and install it in the local
